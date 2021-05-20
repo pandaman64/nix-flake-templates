@@ -1,14 +1,6 @@
 # https://github.com/srid/rust-nix-template/blob/b35f2df597ae7da9c87c68b4b72eefcb6b3b8dfa/flake.nix
-
-# parameters
-let
-  name = "NAME OF THE PACKAGE";
-  description = "DESCRIPTION OF THE PACKAGE";
-  rustChannel = "stable";
-  runTests = true;
-in
 {
-  inherit description;
+  description = "DESCRIPTION OF THE PACKAGE";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -28,6 +20,11 @@ in
     utils.lib.eachDefaultSystem
       (system:
         let
+          # parameters
+          name = "NAME OF THE PACKAGE";
+          rustChannel = "stable";
+          runTests = true;
+
           pkgs = import nixpkgs {
             inherit system;
             overlays = [
