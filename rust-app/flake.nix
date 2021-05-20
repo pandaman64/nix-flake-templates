@@ -27,13 +27,15 @@
 
           pkgs = import nixpkgs {
             inherit system;
-            overlays = [
-              rust-overlay.overlay
-              (self: super: {
-                rustc = self.rust-bin.${rustChannel}.latest.default;
-                cargo = self.rust-bin.${rustChannel}.latest.default;
-              })
-            ];
+
+            # The rust overlay may cause link error on darwin
+            # overlays = [
+            #   rust-overlay.overlay
+            #   (self: super: {
+            #     rustc = self.rust-bin.${rustChannel}.latest.default;
+            #     cargo = self.rust-bin.${rustChannel}.latest.default;
+            #   })
+            # ];
           };
           inherit (import "${crate2nix}/tools.nix" { inherit pkgs; }) generatedCargoNix;
 
